@@ -1,0 +1,11 @@
+{
+  "users": [],
+  "prodotti": [
+    {
+      "id": 1,
+      "codice": "A001",
+      "nomeProdotto": "olio",
+      "prezzo": 6
+    }
+  ]
+}
