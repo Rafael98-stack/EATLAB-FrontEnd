@@ -33,23 +33,29 @@ export class AuthService {
   //     }
 
   registerCustomer(userDetails: any): Observable<any> {
-    userDetails.type = 'CUSTOMER';
-    userDetails.role = 'USER';
-    userDetails.id = uuidv4();
-    return this.http.post<any>(
-      `${this.apiUrl}auth/register/customer`,
-      userDetails
+    const newUser: User = new User(
+      userDetails.name,
+      userDetails.surname,
+      userDetails.email,
+      userDetails.password
     );
+    newUser.type = 'CUSTOMER';
+    newUser.role = 'USER';
+    newUser.id = uuidv4();
+    return this.http.post<any>(`${this.apiUrl}auth/register/customer`, newUser);
   }
 
   registerOwner(userDetails: any): Observable<any> {
-    userDetails.type = 'OWNER';
-    userDetails.role = 'USER';
-    userDetails.id = uuidv4();
-    return this.http.post<any>(
-      `${this.apiUrl}auth/register/owner`,
-      userDetails
+    const newUser: User = new User(
+      userDetails.name,
+      userDetails.surname,
+      userDetails.email,
+      userDetails.password
     );
+    newUser.type = 'OWNER';
+    newUser.role = 'USER';
+    newUser.id = uuidv4();
+    return this.http.post<any>(`${this.apiUrl}auth/register/owner`, newUser);
   }
 
   private decodeToken(token: string): User | null {

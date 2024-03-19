@@ -1,6 +1,7 @@
 import { AuthData } from './auth-data';
 
 export class User {
+  accesstoken!: '';
   id!: string;
   name: string;
   surname: string;

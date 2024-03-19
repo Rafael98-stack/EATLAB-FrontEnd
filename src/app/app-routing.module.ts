@@ -4,9 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { PComponent } from './components/p/p.component';
-import { PpComponent } from './components/pp/pp.component';
+import { RistorantiComponent } from './components/ristoranti/p.component';
+import { PrenotazioniComponent } from './components/prenotazioni/pp.component';
 import { AuthGuard } from './components/auth/auth.guard';
+import { AuthCustomerGuard } from './components/auth/auth-customer.guard';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -14,14 +16,14 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'prodotti',
-    component: PComponent,
+    path: 'ristoranti',
+    component: RistorantiComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'prodottiregistrati',
-    component: PpComponent,
-    canActivate: [AuthGuard],
+    path: 'prenotazioni',
+    component: PrenotazioniComponent,
+    canActivate: [AuthCustomerGuard],
   },
   {
     path: 'login',
@@ -38,7 +40,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), FormsModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
