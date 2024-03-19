@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { tap, catchError } from 'rxjs';
 import { User } from './user';
 import { v4 as uuidv4 } from 'uuid';
+import { Authlogin } from './authlogin';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +42,6 @@ export class AuthService {
     );
     newUser.type = 'CUSTOMER';
     newUser.role = 'USER';
-    newUser.id = uuidv4();
     return this.http.post<any>(`${this.apiUrl}auth/register/customer`, newUser);
   }
 
@@ -68,21 +68,19 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http
-      .post<any>(`${this.apiUrl}auth/login`, { email, password })
-      .pipe(
-        tap((response: any) => {
-          if (response && response.token) {
-            localStorage.setItem(this.tokenKey, response.token);
-            const decodedToken = this.decodeToken(response.token);
-            if (decodedToken) {
-              this.authSubj.next(decodedToken);
-            }
-            this.router.navigate(['/']);
+  login(loginUser: Authlogin): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}auth/login/user`, loginUser).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          localStorage.setItem(this.tokenKey, response.token);
+          const decodedToken = this.decodeToken(response.token);
+          if (decodedToken) {
+            this.authSubj.next(decodedToken);
           }
-        })
-      );
+          this.router.navigate(['']);
+        }
+      })
+    );
   }
 
   logout(): void {
