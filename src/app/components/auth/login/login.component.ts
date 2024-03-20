@@ -16,14 +16,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    this.authService.login(this.loginUser).subscribe(
-      (response) => {
-        console.log('Login successful', response);
-        this.router.navigate(['/']);
-      },
-      (error) => {
-        console.error('Login failed', error);
-      }
-    );
+    this.authService
+      .login(this.loginUser.email, this.loginUser.password)
+      .subscribe(
+        (response) => {
+          console.log('Login successful', response);
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error('Login failed', error);
+        }
+      );
   }
 }

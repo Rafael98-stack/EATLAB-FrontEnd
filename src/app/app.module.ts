@@ -11,15 +11,21 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { RegisterOwnerComponent } from './components/auth/register-owner/register-owner.component';
+import { HomeComponent } from './components/home/home.component';
+import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
 
 @NgModule({
   declarations: [
+    HomeComponent,
     AppComponent,
     NavbarComponent,
     RistorantiComponent,
     PrenotazioniComponent,
     LoginComponent,
     RegisterComponent,
+    RegisterOwnerComponent,
+    ITuoiRistorantiComponent,
   ],
   imports: [
     BrowserModule,

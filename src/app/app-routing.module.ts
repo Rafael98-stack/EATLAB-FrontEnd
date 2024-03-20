@@ -9,6 +9,9 @@ import { PrenotazioniComponent } from './components/prenotazioni/pp.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { AuthCustomerGuard } from './components/auth/auth-customer.guard';
 import { FormsModule } from '@angular/forms';
+import { RegisterOwnerComponent } from './components/auth/register-owner/register-owner.component';
+import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
+import { AuthownerGuard } from './components/auth/authowner.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +35,15 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'registerowner',
+    component: RegisterOwnerComponent,
+  },
+  {
+    path: 'ituoiristoranti',
+    component: ITuoiRistorantiComponent,
+    canActivate: [AuthownerGuard],
   },
   {
     path: '**',

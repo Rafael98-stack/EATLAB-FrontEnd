@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { User } from '../user';
 import { AuthData } from '../auth-data';
-import { NgForm } from '@angular/forms';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-register-owner',
+  templateUrl: './register-owner.component.html',
+  styleUrls: ['./register-owner.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterOwnerComponent implements OnInit {
   newUser: AuthData = { name: '', surname: '', email: '', password: '' };
+
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
-  registerCustomer(): void {
-    this.authSrv.registerCustomer(this.newUser).subscribe(
+  registerOwner(): void {
+    this.authSrv.registerOwner(this.newUser).subscribe(
       (response) => {
         console.log('Registration successful', response);
         this.router.navigate(['/login']);

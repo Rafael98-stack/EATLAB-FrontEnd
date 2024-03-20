@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-pp',
+  selector: 'app-prenotazioni',
   templateUrl: './pp.component.html',
   styleUrls: ['./pp.component.scss'],
 })

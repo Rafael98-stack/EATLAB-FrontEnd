@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
-  Router,
 } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
-import { map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthCustomerGuard implements CanActivate {
+export class AuthownerGuard implements CanActivate {
   constructor(private authSrv: AuthService, private router: Router) {}
 
   canActivate(
@@ -24,10 +23,7 @@ export class AuthCustomerGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
-      this.authSrv.isLoggedIn() &&
-      this.authSrv.currentUserType === 'CUSTOMER'
-    ) {
+    if (this.authSrv.isLoggedIn() && this.authSrv.currentUserType === 'OWNER') {
       return true;
     } else {
       alert('Non puoi accedere a questa pagina. \nAccedi o Registrati');

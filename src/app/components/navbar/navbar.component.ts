@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../auth/user';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,15 +12,19 @@ import { AuthService } from '../auth/auth.service';
 export class NavbarComponent implements OnInit {
   utente!: User | null;
 
-  constructor(private authSrv: AuthService) {}
+  isAuthenticated$: Observable<boolean> | undefined;
+
+  currentUserType$: Observable<string> | undefined =
+    this.authSrv.typeUserAsObs();
+
+  constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authSrv.user$.subscribe((user) => {
-      this.utente = user;
-    });
+    this.isAuthenticated$ = this.authSrv.user$;
   }
 
   logout() {
     this.authSrv.logout();
+    this.router.navigate(['/']);
   }
 }

@@ -24,17 +24,11 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.authSrv.user$.pipe(
-      take(1),
-      map((utente) => {
-        if (utente) {
-          return true;
-        }
-        alert(
-          'Per Visualizzare questa risorsa devi essere loggato!\nAccedi o registrati'
-        );
-        return this.router.createUrlTree(['/login']);
-      })
-    );
+    if (this.authSrv.isLoggedIn()) {
+      return true;
+    } else {
+      alert('Non puoi accedere a questa pagina. \nAccedi o Registrati');
+      return this.router.createUrlTree(['/login']);
+    }
   }
 }

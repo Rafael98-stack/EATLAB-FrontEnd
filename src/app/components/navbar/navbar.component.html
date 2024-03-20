@@ -23,6 +23,7 @@
       </li>
       <li class="nav-item">
         <a
+          *ngIf="isAuthenticated$ | async"
           class="nav-link"
           [routerLink]="['/ristoranti']"
           routerLinkActive="active"
@@ -31,18 +32,37 @@
       </li>
       <li class="nav-item">
         <a
+          *ngIf="
+            (isAuthenticated$ | async) &&
+            (currentUserType$ | async) === 'CUSTOMER'
+          "
           class="nav-link"
           [routerLink]="['/prenotazioni']"
           routerLinkActive="active"
           >Prenotazioni</a
         >
       </li>
-      <li class="nav-item" *ngIf="!utente">
-        <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active"
+      <li class="nav-item">
+        <a
+          *ngIf="
+            (isAuthenticated$ | async) && (currentUserType$ | async) === 'OWNER'
+          "
+          class="nav-link"
+          [routerLink]="['/ituoiristoranti']"
+          routerLinkActive="active"
+          >I Tuoi Ristoranti</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          *ngIf="!(isAuthenticated$ | async)"
+          class="nav-link"
+          [routerLink]="['/login']"
+          routerLinkActive="active"
           >Login</a
         >
       </li>
-      <li class="nav-item" *ngIf="!utente">
+      <li class="nav-item" *ngIf="!(isAuthenticated$ | async)">
         <a
           class="nav-link"
           [routerLink]="['/register']"
@@ -50,14 +70,14 @@
           >Register</a
         >
       </li>
+      <button
+        *ngIf="isAuthenticated$ | async"
+        type="button"
+        class="btn btn-danger ms-2"
+        (click)="logout()"
+      >
+        LOGOUT
+      </button>
     </ul>
-    <button
-      type="button"
-      class="btn btn-danger ms-2 float-end"
-      *ngIf="utente"
-      (click)="logout()"
-    >
-      LOGOUT
-    </button>
   </div>
 </nav>
