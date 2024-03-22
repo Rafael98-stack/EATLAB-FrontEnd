@@ -8,11 +8,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { tap, catchError } from 'rxjs';
 import { User } from './user';
 import { v4 as uuidv4 } from 'uuid';
+import { v4 as UUID } from 'uuid';
 import { Authlogin } from './authlogin';
 import { AuthData } from './auth-data';
-import { RestaurantCreationDTO } from './restaurant-creation-dto';
+import { RestaurantCreationDTO } from './payloads/restaurants/restaurant-creation-dto';
 import { Restaurant } from './restaurant';
-import { RestaurantResponse } from './restaurant-response';
+import { RestaurantResponse } from './payloads/restaurants/restaurant-response';
+import { RestaurantUpdatingDTO } from './payloads/restaurants/restaurant-updating-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -168,6 +170,11 @@ export class AuthService {
     );
   }
 
+  getRestaurantById(restaurantId: string): Observable<Restaurant> {
+    const url = `${this.apiUrl}restaurants/${restaurantId}`;
+    return this.http.get<Restaurant>(url);
+  }
+
   createPostRestaurant(
     restaurantDto: RestaurantCreationDTO
   ): Observable<any[]> {
@@ -186,7 +193,6 @@ export class AuthService {
       console.error('AccessToken non presente nel localStorage');
       return of([]);
     }
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -202,5 +208,63 @@ export class AuthService {
           return of([]);
         })
       );
+  }
+
+  updateRestaurant(
+    restaurantId: string,
+    restaurantDto: RestaurantUpdatingDTO
+  ): Observable<Restaurant | null> {
+    const accessToken = localStorage.getItem('accessToken');
+    const restaurant: Restaurant = new Restaurant(
+      restaurantDto.logo,
+      restaurantDto.title,
+      restaurantDto.description,
+      restaurantDto.telephone_contact,
+      restaurantDto.seat,
+      restaurantDto.address,
+      restaurantDto.city
+    );
+    if (!accessToken) {
+      console.error('AccessToken non presente nel localStorage');
+      return of(null);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    const url = `${this.apiUrl}restaurants/${restaurantId}`;
+
+    return this.http.put<Restaurant>(url, restaurant, { headers }).pipe(
+      catchError((error) => {
+        console.error("Errore durante l'aggiornamento del ristorante:", error);
+
+        return of(new Restaurant('', '', '', '', 0, '', ''));
+      })
+    );
+  }
+
+  deleteRestaurant(restaurantId: string): Observable<any> {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      console.error('AccessToken non presente nel localStorage');
+      return throwError('AccessToken non presente nel localStorage');
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      }),
+    };
+
+    const url = `${this.apiUrl}restaurants/${restaurantId}`;
+
+    return this.http.delete<any>(url, httpOptions).pipe(
+      catchError((error) => {
+        console.error("Errore durante l'eliminazione del ristorante:", error);
+        return throwError(error);
+      })
+    );
   }
 }

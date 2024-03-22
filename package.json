@@ -25,6 +25,7 @@
     "mssql": "^10.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

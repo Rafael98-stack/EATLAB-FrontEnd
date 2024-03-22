@@ -13,6 +13,7 @@ import { RegisterOwnerComponent } from './components/auth/register-owner/registe
 import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
 import { AuthownerGuard } from './components/auth/authowner.guard';
 import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
+import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'creazioneristorante',
     component: CreazioneRistoranteComponent,
+  },
+  {
+    path: 'modificaristorante/:id',
+    component: ModificaRistoranteComponent,
   },
   {
     path: '**',

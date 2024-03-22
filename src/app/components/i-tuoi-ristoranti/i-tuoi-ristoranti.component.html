@@ -10,6 +10,10 @@
       <h3>{{ restaurant.address }}</h3>
       <h3>{{ restaurant.city }}</h3>
       <img [src]="restaurant.logo" alt="Restaurant Logo" />
+      <button (click)="navToModificaRistorante(restaurant.id)">Modifica</button>
+      <button (click)="deleteRestaurant(restaurant.id)" class="btn btn-danger">
+        Elimina
+      </button>
     </li>
   </ul>
 </div>

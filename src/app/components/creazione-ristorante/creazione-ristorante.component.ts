@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import { RestaurantCreationDTO } from '../auth/restaurant-creation-dto';
+import { RestaurantCreationDTO } from '../auth/payloads/restaurants/restaurant-creation-dto';
 
 @Component({
   selector: 'app-creazione-ristorante',

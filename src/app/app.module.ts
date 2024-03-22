@@ -15,6 +15,7 @@ import { RegisterOwnerComponent } from './components/auth/register-owner/registe
 import { HomeComponent } from './components/home/home.component';
 import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
 import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
+import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CreazioneRistoranteComponent } from './components/creazione-ristorante/
     RegisterOwnerComponent,
     ITuoiRistorantiComponent,
     CreazioneRistoranteComponent,
+    ModificaRistoranteComponent,
   ],
   imports: [
     BrowserModule,
