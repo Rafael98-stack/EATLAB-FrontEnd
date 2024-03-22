@@ -14,13 +14,14 @@ export class NavbarComponent implements OnInit {
 
   isAuthenticated$: Observable<boolean> | undefined;
 
-  currentUserType$: Observable<string> | undefined =
-    this.authSrv.typeUserAsObs();
+  currentUserType$: Observable<string> | undefined;
 
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authSrv.user$;
+    this.currentUserType$ = this.authSrv.typeUserAsObs();
+    console.log(this.currentUserType$);
   }
 
   logout() {

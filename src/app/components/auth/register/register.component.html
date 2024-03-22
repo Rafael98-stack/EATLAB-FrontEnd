@@ -10,6 +10,7 @@
         [(ngModel)]="newUser.name"
         placeholder="Nome"
         required
+        autocomplete="off"
       />
     </div>
 
@@ -23,6 +24,7 @@
         [(ngModel)]="newUser.surname"
         placeholder="Cognome"
         required
+        autocomplete="off"
       />
     </div>
 
@@ -36,6 +38,7 @@
         [(ngModel)]="newUser.email"
         placeholder="E-Mail"
         required
+        autocomplete="off"
       />
     </div>
 
@@ -50,6 +53,7 @@
         placeholder="Password"
         required
         minlength="6"
+        autocomplete="off"
       />
     </div>
     <button type="submit" class="btn btn-primary mt-3">Invia</button>

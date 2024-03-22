@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
@@ -10,6 +10,9 @@ import { User } from './user';
 import { v4 as uuidv4 } from 'uuid';
 import { Authlogin } from './authlogin';
 import { AuthData } from './auth-data';
+import { RestaurantCreationDTO } from './restaurant-creation-dto';
+import { Restaurant } from './restaurant';
+import { RestaurantResponse } from './restaurant-response';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +26,15 @@ export class AuthService {
 
   currentUserType: string = '';
 
+  private accessToken: string | null;
+
   currentUserTypeAsObs: BehaviorSubject<string> = new BehaviorSubject<string>(
     ''
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.accessToken = localStorage.getItem('accessToken');
+  }
 
   login(email: string, password: string): Observable<any> {
     return this.http
@@ -87,11 +94,10 @@ export class AuthService {
   }
 
   typeUser(type: string) {
-    return (
-      type &&
-      (this.currentUserType = type) &&
-      this.currentUserTypeAsObs.next(type)
-    );
+    if (type) {
+      this.currentUserType = type;
+      this.currentUserTypeAsObs.next(type);
+    }
   }
   typeUserAsObs(): Observable<string> {
     return this.currentUserTypeAsObs.asObservable();
@@ -113,5 +119,88 @@ export class AuthService {
 
   getAccessToken(): string {
     return this.accessTokenSubject.value;
+  }
+
+  //////////////////////////////// restaurants  /////////////////////////////////////////////////////////////////////////
+
+  getRestaurants(
+    page: number = 0,
+    size: number = 10,
+    orderBy: string = 'id'
+  ): Observable<Restaurant[]> {
+    if (!this.accessToken) {
+      console.error('access token not found.');
+      return new Observable<Restaurant[]>();
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.accessToken}`,
+    });
+    const options = {
+      headers: headers,
+      params: {
+        page: page.toString(),
+        size: size.toString(),
+        orderBy: orderBy,
+      },
+    };
+    return this.http
+      .get<RestaurantResponse>(`${this.apiUrl}restaurants`, options)
+      .pipe(
+        map((response) => response.content),
+        catchError((error) => {
+          console.error('Error fetching restaurants:', error);
+          throw error;
+        })
+      );
+  }
+
+  getMyRestaurants(): Observable<any[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      }),
+    };
+    return this.http.get<any[]>(
+      `${this.apiUrl}restaurants/myrestaurants`,
+      httpOptions
+    );
+  }
+
+  createPostRestaurant(
+    restaurantDto: RestaurantCreationDTO
+  ): Observable<any[]> {
+    const restaurant: Restaurant = new Restaurant(
+      restaurantDto.logo,
+      restaurantDto.title,
+      restaurantDto.description,
+      restaurantDto.telephone_contact,
+      restaurantDto.seat,
+      restaurantDto.address,
+      restaurantDto.city
+    );
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      console.error('AccessToken non presente nel localStorage');
+      return of([]);
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      }),
+    };
+
+    return this.http
+      .post<any>(`${this.apiUrl}restaurants/creation`, restaurant, httpOptions)
+      .pipe(
+        catchError((error) => {
+          console.error('Error during creation of restaurant:', error);
+          return of([]);
+        })
+      );
   }
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { Restaurant } from '../auth/restaurant';
 
 @Component({
   selector: 'app-ristoranti',
@@ -6,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./p.component.scss'],
 })
 export class RistorantiComponent implements OnInit {
-  constructor() {}
+  restaurants$: Observable<Restaurant[]> | undefined;
 
-  ngOnInit(): void {}
+  constructor(private authSrv: AuthService) {}
+
+  ngOnInit(): void {
+    this.restaurants$ = this.authSrv.getRestaurants();
+    this.restaurants$.subscribe((data) => console.log(data));
+  }
 }

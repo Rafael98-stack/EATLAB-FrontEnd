@@ -1,1 +1,15 @@
 <p>i-tuoi-ristoranti works!</p>
+<div>
+  <button (click)="navToCreazioneRistorante()">Crea un Post</button>
+</div>
+<h1>i Miei Ristoranti</h1>
+<div *ngIf="myRestaurants$ | async as myRestaurants" class="container">
+  <ul>
+    <li *ngFor="let restaurant of myRestaurants">
+      <h2>{{ restaurant.title }}</h2>
+      <h3>{{ restaurant.address }}</h3>
+      <h3>{{ restaurant.city }}</h3>
+      <img [src]="restaurant.logo" alt="Restaurant Logo" />
+    </li>
+  </ul>
+</div>

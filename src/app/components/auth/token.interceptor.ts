@@ -24,8 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
           console.log(request);
           return next.handle(request);
         } else {
-          // Ottieni il token solo se l'utente è autenticato
-          const accessToken = this.authSrv.getAccessToken(); // Modifica questo metodo in base alla tua implementazione di AuthService
+          const accessToken = this.authSrv.getAccessToken();
           const newReq = request.clone({
             setHeaders: {
               Authorization: `Bearer ${accessToken}`,

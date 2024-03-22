@@ -1,0 +1,99 @@
+<p>creazione-ristorante works!</p>
+<div class="container">
+  <form (ngSubmit)="createRestaurant()">
+    <div>
+      <label for="logoInput">Seleziona il Logo:</label>
+      <input
+        type="file"
+        id="logoInput"
+        (change)="onLogoSelected($event)"
+        accept="image/*"
+      />
+    </div>
+
+    <div *ngIf="newrestaurant.logo">
+      <img [src]="newrestaurant.logo" alt="Logo" width="100" height="100" />
+    </div>
+
+    <div class="form-group">
+      <label for="title">Titolo</label>
+
+      <input
+        type="text"
+        id="title"
+        name="title"
+        [(ngModel)]="newrestaurant.title"
+        placeholder="Titolo"
+        required
+        autocomplete="off"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Descrizione</label>
+
+      <input
+        type="text"
+        id="description"
+        name="description"
+        [(ngModel)]="newrestaurant.description"
+        placeholder="Descrizione"
+        required
+        autocomplete="off"
+      />
+    </div>
+    <div class="form-group">
+      <label for="telephone_contact">Telefono</label>
+
+      <input
+        type="text"
+        id="telephone_contact"
+        name="telephone_contact"
+        [(ngModel)]="newrestaurant.telephone_contact"
+        placeholder="Telefono"
+        required
+        autocomplete="off"
+      />
+    </div>
+    <div class="form-group">
+      <label for="seat">Posti a sedere</label>
+
+      <input
+        type="number"
+        id="seat"
+        name="seat"
+        [(ngModel)]="newrestaurant.seat"
+        placeholder="Posti"
+        required
+        autocomplete="off"
+      />
+    </div>
+    <div class="form-group">
+      <label for="address">Via</label>
+
+      <input
+        type="text"
+        id="address"
+        name="address"
+        [(ngModel)]="newrestaurant.address"
+        placeholder="Via"
+        required
+        autocomplete="off"
+      />
+    </div>
+    <div class="form-group">
+      <label for="city">Citta</label>
+
+      <input
+        type="text"
+        id="city"
+        name="city"
+        [(ngModel)]="newrestaurant.city"
+        placeholder="Citta"
+        required
+        autocomplete="off"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Crea</button>
+  </form>
+</div>

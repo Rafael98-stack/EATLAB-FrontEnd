@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { RegisterOwnerComponent } from './components/auth/register-owner/register-owner.component';
 import { HomeComponent } from './components/home/home.component';
 import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
+import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-
     RegisterComponent,
     RegisterOwnerComponent,
     ITuoiRistorantiComponent,
+    CreazioneRistoranteComponent,
   ],
   imports: [
     BrowserModule,

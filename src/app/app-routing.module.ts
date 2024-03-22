@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterOwnerComponent } from './components/auth/register-owner/register-owner.component';
 import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
 import { AuthownerGuard } from './components/auth/authowner.guard';
+import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
     path: 'ituoiristoranti',
     component: ITuoiRistorantiComponent,
     canActivate: [AuthownerGuard],
+  },
+  {
+    path: 'creazioneristorante',
+    component: CreazioneRistoranteComponent,
   },
   {
     path: '**',
