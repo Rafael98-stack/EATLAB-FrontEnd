@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../auth/user';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -10,8 +9,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  utente!: User | null;
-
   isAuthenticated$: Observable<boolean> | undefined;
 
   currentUserType$: Observable<string> | undefined;
@@ -21,6 +18,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.isAuthenticated$ = this.authSrv.user$;
     this.currentUserType$ = this.authSrv.typeUserAsObs();
+
     console.log(this.currentUserType$);
   }
 

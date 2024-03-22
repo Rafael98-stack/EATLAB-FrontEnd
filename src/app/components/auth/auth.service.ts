@@ -45,6 +45,7 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('accessToken', response.accessToken);
           localStorage.setItem('userId', response.id);
+          console.log('User Type:', response.userType);
           this.user$.next(true);
         }),
         catchError((error) => {
