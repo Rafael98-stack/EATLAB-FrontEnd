@@ -36,6 +36,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.accessToken = localStorage.getItem('accessToken');
+    this.user$.next(!!this.accessToken);
   }
 
   login(email: string, password: string): Observable<any> {
@@ -45,6 +46,8 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('accessToken', response.accessToken);
           localStorage.setItem('userId', response.id);
+          this.currentUserType = response.userType;
+          this.currentUserTypeAsObs.next(response.userType);
           console.log('User Type:', response.userType);
           this.user$.next(true);
         }),
@@ -109,6 +112,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
+    this.accessToken = null;
     this.user$.next(false);
   }
 
@@ -120,8 +124,8 @@ export class AuthService {
     return this.user$.asObservable();
   }
 
-  getAccessToken(): string {
-    return this.accessTokenSubject.value;
+  getAccessToken(): string | null {
+    return this.accessToken;
   }
 
   //////////////////////////////// restaurants  /////////////////////////////////////////////////////////////////////////
@@ -131,6 +135,7 @@ export class AuthService {
     size: number = 10,
     orderBy: string = 'id'
   ): Observable<Restaurant[]> {
+    this.accessToken = localStorage.getItem('accessToken');
     if (!this.accessToken) {
       console.error('access token not found.');
       return new Observable<Restaurant[]>();

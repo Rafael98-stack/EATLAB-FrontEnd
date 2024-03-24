@@ -32,7 +32,10 @@
       </li>
       <li class="nav-item">
         <a
-          *ngIf="isAuthenticated$ | async"
+          *ngIf="
+            (isAuthenticated$ | async) &&
+            (currentUserType$ | async) === 'CUSTOMER'
+          "
           class="nav-link"
           [routerLink]="['/prenotazioni']"
           routerLinkActive="active"
@@ -41,7 +44,9 @@
       </li>
       <li class="nav-item">
         <a
-          *ngIf="isAuthenticated$ | async"
+          *ngIf="
+            (isAuthenticated$ | async) && (currentUserType$ | async) === 'OWNER'
+          "
           class="nav-link"
           [routerLink]="['/ituoiristoranti']"
           routerLinkActive="active"

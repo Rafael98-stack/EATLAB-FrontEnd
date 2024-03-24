@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authSrv.user$;
-    this.currentUserType$ = this.authSrv.typeUserAsObs();
+    this.currentUserType$ = this.authSrv.currentUserTypeAsObs;
 
     console.log(this.currentUserType$);
   }

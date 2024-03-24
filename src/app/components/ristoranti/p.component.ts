@@ -14,7 +14,14 @@ export class RistorantiComponent implements OnInit {
   constructor(private authSrv: AuthService) {}
 
   ngOnInit(): void {
+    this.loadRestaurants();
+  }
+
+  loadRestaurants(): void {
     this.restaurants$ = this.authSrv.getRestaurants();
-    this.restaurants$.subscribe((data) => console.log(data));
+    this.restaurants$.subscribe(
+      (data) => console.log(data),
+      (error) => console.error('Error fetching restaurants:', error)
+    );
   }
 }
