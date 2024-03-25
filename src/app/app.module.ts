@@ -16,6 +16,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-ristoranti.component';
 import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
 import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
+import { CreaprenotazioneComponent } from './components/creaprenotazione/creaprenotazione.component';
+import { ModificaPrenotazioneComponent } from './components/modifica-prenotazione/modifica-prenotazione.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ModificaRistoranteComponent } from './components/modifica-ristorante/mo
     ITuoiRistorantiComponent,
     CreazioneRistoranteComponent,
     ModificaRistoranteComponent,
+    CreaprenotazioneComponent,
+    ModificaPrenotazioneComponent,
   ],
   imports: [
     BrowserModule,

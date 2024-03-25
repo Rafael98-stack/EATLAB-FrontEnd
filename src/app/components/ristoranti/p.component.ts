@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { Restaurant } from '../auth/restaurant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ristoranti',
@@ -10,11 +11,12 @@ import { Restaurant } from '../auth/restaurant';
 })
 export class RistorantiComponent implements OnInit {
   restaurants$: Observable<Restaurant[]> | undefined;
-
-  constructor(private authSrv: AuthService) {}
+  currentUserType$: Observable<string> | undefined;
+  constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadRestaurants();
+    this.currentUserType$ = this.authSrv.currentUserTypeAsObs;
   }
 
   loadRestaurants(): void {
@@ -23,5 +25,9 @@ export class RistorantiComponent implements OnInit {
       (data) => console.log(data),
       (error) => console.error('Error fetching restaurants:', error)
     );
+  }
+
+  navigateToReservation(restaurantId: string): void {
+    this.router.navigate(['/creaprenotazione', restaurantId]);
   }
 }

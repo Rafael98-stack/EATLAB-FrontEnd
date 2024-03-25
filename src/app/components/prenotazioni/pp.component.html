@@ -1,1 +1,15 @@
-<p>pp works!</p>
+<div *ngIf="reservations.length > 0; else noReservations">
+  <h1>Le tue prenotazioni</h1>
+  <ul>
+    <li *ngFor="let reservation of reservations">
+      <p>Data della prenotazione: {{ reservation.date }}</p>
+      <p>Numero di persone: {{ reservation.persons }}</p>
+      <button (click)="deleteReservation(reservation.id)">Elimina</button>
+      <button (click)="navigateToEdit(reservation.id)">Modifica</button>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noReservations>
+  <p>Non hai ancora effettuato alcuna prenotazione.</p>
+</ng-template>

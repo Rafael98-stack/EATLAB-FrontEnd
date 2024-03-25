@@ -14,6 +14,8 @@ import { ITuoiRistorantiComponent } from './components/i-tuoi-ristoranti/i-tuoi-
 import { AuthownerGuard } from './components/auth/authowner.guard';
 import { CreazioneRistoranteComponent } from './components/creazione-ristorante/creazione-ristorante.component';
 import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
+import { CreaprenotazioneComponent } from './components/creaprenotazione/creaprenotazione.component';
+import { ModificaPrenotazioneComponent } from './components/modifica-prenotazione/modifica-prenotazione.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,14 @@ const routes: Routes = [
   {
     path: 'modificaristorante/:id',
     component: ModificaRistoranteComponent,
+  },
+  {
+    path: 'creaprenotazione/:id',
+    component: CreaprenotazioneComponent,
+  },
+  {
+    path: 'modificaprenotazione/:id',
+    component: ModificaPrenotazioneComponent,
   },
   {
     path: '**',

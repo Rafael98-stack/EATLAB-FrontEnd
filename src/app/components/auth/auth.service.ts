@@ -15,6 +15,9 @@ import { RestaurantCreationDTO } from './payloads/restaurants/restaurant-creatio
 import { Restaurant } from './restaurant';
 import { RestaurantResponse } from './payloads/restaurants/restaurant-response';
 import { RestaurantUpdatingDTO } from './payloads/restaurants/restaurant-updating-dto';
+import { Reservationcreationdto } from './payloads/recervations/reservationcreationdto';
+import { Reservation } from './reservation';
+import { Reservationupdatingdto } from './payloads/recervations/reservationupdatingdto';
 
 @Injectable({
   providedIn: 'root',
@@ -128,7 +131,7 @@ export class AuthService {
     return this.accessToken;
   }
 
-  //////////////////////////////// restaurants  /////////////////////////////////////////////////////////////////////////
+  //////////////////////////////// RESTAURANTS  /////////////////////////////////////////////////////////////////////////
 
   getRestaurants(
     page: number = 0,
@@ -272,5 +275,109 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  ////////////////////////////////// RESERVATIONS /////////////////////////////////////////////////
+
+  createReservation(
+    restaurantId: string | undefined,
+    reservationDto: Reservationcreationdto
+  ): Observable<Reservation | null> {
+    const reservations: Reservation = new Reservation(
+      reservationDto.date,
+      reservationDto.persons
+    );
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      console.error('AccessToken non presente nel localStorage');
+      return of(null);
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+    const url = `${this.apiUrl}reservations/creation/${restaurantId}`;
+
+    return this.http.post<Reservation>(url, reservations, { headers }).pipe(
+      catchError((error) => {
+        console.error('Errore durante la creazione della prenotazione:', error);
+
+        return of(new Reservation(new Date(), 0));
+      })
+    );
+  }
+
+  getMyReservations(): Observable<Reservation[]> {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      console.error('Access token not found.');
+      return throwError('Access token not found.');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    return this.http
+      .get<Reservation[]>(`${this.apiUrl}reservations/myreservations`, {
+        headers,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching reservations:', error);
+          throw error;
+        })
+      );
+  }
+
+  deleteReservation(reservationId: string): Observable<void> {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      console.error('Access token not found in localStorage');
+      return throwError('Access token not found');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    const url = `${this.apiUrl}reservations/${reservationId}`;
+
+    return this.http.delete<void>(url, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error deleting reservation:', error);
+        throw error;
+      })
+    );
+  }
+
+  updateReservation(
+    reservationId: string | undefined,
+    updatedReservation: Reservationupdatingdto
+  ): Observable<Reservation | null> {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      console.error('AccessToken non presente nel localStorage');
+      return of(null);
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+
+    const url = `${this.apiUrl}reservations/${reservationId}`;
+
+    return this.http
+      .put<Reservation>(url, updatedReservation, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error(
+            "Errore durante l'aggiornamento della prenotazione:",
+            error
+          );
+          return of(null);
+        })
+      );
   }
 }

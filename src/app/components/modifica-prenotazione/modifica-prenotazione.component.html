@@ -1,0 +1,26 @@
+<div>
+  <h1>Modifica Prenotazione</h1>
+  <form (ngSubmit)="updateReservation()">
+    <div class="form-group">
+      <label for="date">Data</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        [(ngModel)]="reservationUpdating.date"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="persons">Numero di persone</label>
+      <input
+        type="number"
+        id="persons"
+        name="persons"
+        [(ngModel)]="reservationUpdating.persons"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Aggiorna Prenotazione</button>
+  </form>
+</div>
