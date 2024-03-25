@@ -68,17 +68,19 @@
           class="nav-link"
           [routerLink]="['/register']"
           routerLinkActive="active"
-          >Register</a
+          >Registrati</a
         >
       </li>
-      <button
-        *ngIf="isAuthenticated$ | async"
-        type="button"
-        class="btn btn-danger ms-2"
-        (click)="logout()"
-      >
-        LOGOUT
-      </button>
+      <div class="d-flex justify-content-end w-100 pe-2">
+        <button
+          *ngIf="isAuthenticated$ | async"
+          type="button"
+          class="btn btn-danger p-1"
+          (click)="logout()"
+        >
+          LOGOUT
+        </button>
+      </div>
     </ul>
   </div>
 </nav>
