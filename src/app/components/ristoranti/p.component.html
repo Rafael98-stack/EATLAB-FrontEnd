@@ -1,28 +1,39 @@
-<p>p works!</p>
+<body class="pt-5">
+  <div
+    class="scheda container pt-5 rounded"
+    *ngIf="restaurants$ | async as restaurants; else loading"
+  >
+    <div class="row justify-content-center">
+      <h1 class="text-center">Lista dei ristoranti</h1>
 
-<div *ngIf="restaurants$ | async as restaurants; else loading">
-  <h1>Lista dei ristoranti</h1>
-
-  <ul>
-    <li *ngFor="let restaurant of restaurants">
-      <h2>{{ restaurant.title }}</h2>
-      <p>Indirizzo: {{ restaurant.address }}</p>
-      <p>Telefono: {{ restaurant.telephone_contact }}</p>
-      <img [src]="restaurant.logo" alt="Restaurant Logo" />
-      <button
-        *ngIf="(currentUserType$ | async) === 'CUSTOMER'"
-        (click)="navigateToReservation(restaurant.id)"
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-4 py-3 d-flex justify-content-center"
+        *ngFor="let restaurant of restaurants"
       >
-        Prenota
-      </button>
-    </li>
-  </ul>
+        <div class="card" style="width: 18rem">
+          <div class="my-img-cont">
+            <img [src]="restaurant.logo" alt="Restaurant Logo" />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fs-4 text-center">{{ restaurant.title }}</h5>
+            <p>Indirizzo: {{ restaurant.address }}</p>
+            <p>Telefono: {{ restaurant.telephone_contact }}</p>
+            <button
+              *ngIf="(currentUserType$ | async) === 'CUSTOMER'"
+              (click)="navigateToReservation(restaurant.id)"
+            >
+              Prenota
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <ng-template #noRestaurants>
-    <p>Nessun ristorante disponibile al momento.</p>
+      <ng-template #noRestaurants>
+        <p>Nessun ristorante disponibile al momento.</p>
+      </ng-template>
+    </div>
+  </div>
+  <ng-template #loading>
+    <p>Caricamento in corso...</p>
   </ng-template>
-</div>
-
-<ng-template #loading>
-  <p>Caricamento in corso...</p>
-</ng-template>
+</body>

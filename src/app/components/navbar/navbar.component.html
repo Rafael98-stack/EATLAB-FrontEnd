@@ -2,8 +2,8 @@
   <button
     class="navbar-toggler"
     type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarNav"
     aria-controls="navbarNav"
     aria-expanded="false"
     aria-label="Toggle navigation"
@@ -71,11 +71,11 @@
           >Registrati</a
         >
       </li>
-      <div class="d-flex justify-content-end w-100 pe-2">
+      <div class="d-flex w-100 justify-content-end me-2">
         <button
           *ngIf="isAuthenticated$ | async"
           type="button"
-          class="btn btn-danger p-1"
+          class="btn btn-danger"
           (click)="logout()"
         >
           LOGOUT
