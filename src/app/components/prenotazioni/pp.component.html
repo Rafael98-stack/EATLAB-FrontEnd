@@ -1,15 +1,52 @@
-<div *ngIf="reservations.length > 0; else noReservations">
-  <h1>Le tue prenotazioni</h1>
-  <ul>
-    <li *ngFor="let reservation of reservations">
-      <p>Data della prenotazione: {{ reservation.date }}</p>
-      <p>Numero di persone: {{ reservation.persons }}</p>
-      <button (click)="deleteReservation(reservation.id)">Elimina</button>
-      <button (click)="navigateToEdit(reservation.id)">Modifica</button>
-    </li>
-  </ul>
-</div>
+<body>
+  <div class="container" *ngIf="reservations.length > 0; else noReservations">
+    <div class="row">
+      <h1 class="text-center py-2">Le tue prenotazioni</h1>
+      <div class="my-table">
+        <div class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th scope="col" class="">Numero Ordine</th>
+                <th scope="col" class="">Data ordine</th>
+                <th scope="col">Numero persone</th>
+                <th scope="col">Azioni</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              <tr *ngFor="let reservation of reservations">
+                <th scope="row"># {{ reservation.id }}</th>
+                <td class="">
+                  {{ reservation.date }}
+                </td>
+                <td>{{ reservation.persons }}</td>
+                <td>
+                  <button
+                    class="btn my-btn my-btn-modify mx-auto fs-6"
+                    (click)="navigateToEdit(reservation.id)"
+                  >
+                    <i class="fa-solid fa-pencil"> Modifica</i>
+                  </button>
+                  <button
+                    class="btn my-btn my-btn-delete mx-auto fs-6"
+                    (click)="deleteReservation(reservation.id)"
+                  >
+                    <i class="fa-solid fa-trash"> Elimina</i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<ng-template #noReservations>
-  <p>Non hai ancora effettuato alcuna prenotazione.</p>
-</ng-template>
+  <ng-template #noReservations>
+    <p>Non hai ancora effettuato alcuna prenotazione.</p>
+  </ng-template>
+</body>
