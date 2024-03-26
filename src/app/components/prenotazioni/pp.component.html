@@ -25,18 +25,20 @@
                 </td>
                 <td>{{ reservation.persons }}</td>
                 <td>
-                  <button
-                    class="btn my-btn my-btn-modify mx-auto fs-6"
-                    (click)="navigateToEdit(reservation.id)"
-                  >
-                    <i class="fa-solid fa-pencil"> Modifica</i>
-                  </button>
-                  <button
-                    class="btn my-btn my-btn-delete mx-auto fs-6"
-                    (click)="deleteReservation(reservation.id)"
-                  >
-                    <i class="fa-solid fa-trash"> Elimina</i>
-                  </button>
+                  <div class="modificaEliminaContainer">
+                    <button
+                      class="btn my-btn my-btn-modify mx-auto fs-6"
+                      (click)="navigateToEdit(reservation.id)"
+                    >
+                      <i class="fa-solid fa-pencil"> Modifica</i>
+                    </button>
+                    <button
+                      class="btn my-btn my-btn-delete mx-auto fs-6"
+                      (click)="deleteReservation(reservation.id)"
+                    >
+                      <i class="fa-solid fa-trash"> Elimina</i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
