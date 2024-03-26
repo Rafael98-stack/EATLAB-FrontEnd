@@ -1,8 +1,8 @@
 <body>
   <div class="container py-5">
-    <div class="modificaRistoranteContainer row bg-light p-3">
-      <form (ngSubmit)="onSubmit()" class="px-0">
-        <div class="col-6">
+    <form (ngSubmit)="onSubmit()" class="px-0">
+      <div class="modificaRistoranteContainer row bg-light p-3">
+        <div class="col-6 px-0 pe-3">
           <div>
             <label for="logoInput">Seleziona il Logo:</label>
             <input
@@ -13,7 +13,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="title">Titolo:</label>
 
             <input
@@ -24,9 +24,10 @@
               placeholder="Titolo"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="description">Descrizione:</label>
 
             <input
@@ -37,9 +38,10 @@
               placeholder="Descrizione"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="telephone_contact">Telefono:</label>
 
             <input
@@ -50,9 +52,10 @@
               placeholder="Telefono"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="seat">Posti a sedere:</label>
 
             <input
@@ -63,9 +66,10 @@
               placeholder="Posti"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="address">Via:</label>
 
             <input
@@ -76,9 +80,10 @@
               placeholder="Via"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group pb-3">
             <label for="city">Citta:</label>
 
             <input
@@ -89,12 +94,15 @@
               placeholder="Citta"
               required
               autocomplete="off"
+              class="w-100"
             />
           </div>
 
           <button type="submit" class="btn btn-primary mt-3">Crea</button>
         </div>
-        <div class="col-6">
+        <div
+          class="col-6 px-0 d-flex align-items-center justify-content-center"
+        >
           <div *ngIf="restaurantDto.logo">
             <img
               [src]="restaurantDto.logo"
@@ -104,7 +112,7 @@
             />
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </body>

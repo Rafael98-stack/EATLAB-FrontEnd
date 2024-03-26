@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'prenotazioni',
     component: PrenotazioniComponent,
-    // canActivate: [AuthCustomerGuard],
+    canActivate: [AuthCustomerGuard],
   },
   {
     path: 'login',
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'ituoiristoranti',
     component: ITuoiRistorantiComponent,
-    // canActivate: [AuthownerGuard],
+    canActivate: [AuthownerGuard],
   },
   {
     path: 'creazioneristorante',
