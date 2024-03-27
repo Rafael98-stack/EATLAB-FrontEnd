@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RistorantiComponent implements OnInit {
   restaurants$: Observable<Restaurant[]> | undefined;
-  currentUserType$: Observable<string> | undefined;
+  currentUserType$!: Observable<string | null> | undefined;
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {

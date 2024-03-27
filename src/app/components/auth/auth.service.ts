@@ -34,9 +34,9 @@ export class AuthService {
 
   private accessToken: string | null;
 
-  currentUserTypeAsObs: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
-  );
+  currentUserTypeAsObs: BehaviorSubject<string | null> = new BehaviorSubject<
+    string | null
+  >(null);
 
   currentUserAvatar$: BehaviorSubject<string | null> = new BehaviorSubject<
     string | null
@@ -45,6 +45,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     this.accessToken = localStorage.getItem('accessToken');
+    this.currentUserType = localStorage.getItem('currentUserType') || '';
+    this.currentUserTypeAsObs.next(localStorage.getItem('currentUserType'));
     this.user$.next(!!this.accessToken);
   }
 
@@ -55,8 +57,8 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('accessToken', response.accessToken);
           localStorage.setItem('userId', response.id);
+          localStorage.setItem('currentUserType', response.userType);
           this.currentUserType = response.userType;
-          this.currentUserTypeAsObs.next(response.userType);
           console.log('User Type:', response.userType);
           this.user$.next(true);
         }),
@@ -118,13 +120,14 @@ export class AuthService {
       this.currentUserTypeAsObs.next(type);
     }
   }
-  typeUserAsObs(): Observable<string> {
+  typeUserAsObs(): Observable<string | null> {
     return this.currentUserTypeAsObs.asObservable();
   }
 
   logout(): void {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('currentUserType');
     this.accessToken = null;
     this.user$.next(false);
   }

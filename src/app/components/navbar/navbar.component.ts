@@ -11,10 +11,9 @@ import { Observable } from 'rxjs';
 export class NavbarComponent implements OnInit {
   isAuthenticated$: Observable<boolean> | undefined;
 
-  currentUserType$: Observable<string> | undefined;
+  currentUserType$!: Observable<string | null>;
 
-  currentUserAvatar$: Observable<string | null> | undefined; // Aggiungi questa variabile per ottenere l'URL dell'avatar dell'utente
-
+  currentUserAvatar$: Observable<string | null> | undefined;
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
