@@ -18,6 +18,7 @@ import { RestaurantUpdatingDTO } from './payloads/restaurants/restaurant-updatin
 import { Reservationcreationdto } from './payloads/recervations/reservationcreationdto';
 import { Reservation } from './reservation';
 import { Reservationupdatingdto } from './payloads/recervations/reservationupdatingdto';
+import { UpdatingProfile } from './updating-profile';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,11 @@ export class AuthService {
   currentUserTypeAsObs: BehaviorSubject<string> = new BehaviorSubject<string>(
     ''
   );
+
+  currentUserAvatar$: BehaviorSubject<string | null> = new BehaviorSubject<
+    string | null
+  >(null);
+  updatedUser: any;
 
   constructor(private http: HttpClient) {
     this.accessToken = localStorage.getItem('accessToken');
@@ -67,12 +73,15 @@ export class AuthService {
       newUser.name,
       newUser.surname,
       newUser.email,
-      newUser.password
+      newUser.password,
+      newUser.avatar
     );
     user.type = 'CUSTOMER';
     user.id = uuidv4();
     user.role = 'USER';
     this.typeUser('CUSTOMER');
+    this.currentUserAvatar$.next(user.avatar);
+    console.log(this.currentUserAvatar$);
     return this.http
       .post<any>(`${this.apiUrl}auth/register/customer`, user)
       .pipe(
@@ -88,7 +97,8 @@ export class AuthService {
       newUser.name,
       newUser.surname,
       newUser.email,
-      newUser.password
+      newUser.password,
+      newUser.avatar
     );
     user.type = 'OWNER';
     user.id = uuidv4();
@@ -129,6 +139,34 @@ export class AuthService {
 
   getAccessToken(): string | null {
     return this.accessToken;
+  }
+
+  ///////////////////////////////////// PROFILO /////////////////////////////////////
+
+  getMyProfile(): Observable<User> {
+    this.accessToken = localStorage.getItem('accessToken');
+    if (!this.accessToken) {
+      throw new Error('Access token not found');
+    }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.accessToken}`,
+    });
+    return this.http.get<User>(`${this.apiUrl}users/me`, { headers });
+  }
+
+  updateProfile(updatedUser: UpdatingProfile): Observable<User> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    });
+
+    return this.http
+      .put<User>(`${this.apiUrl}users/me`, updatedUser, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error("Errore durante l'aggiornamento del profilo:", error);
+          throw error;
+        })
+      );
   }
 
   //////////////////////////////// RESTAURANTS  /////////////////////////////////////////////////////////////////////////

@@ -32,28 +32,34 @@
       </li>
       <li class="nav-item">
         <a
-          *ngIf="
-            (isAuthenticated$ | async) &&
-            (currentUserType$ | async) === 'CUSTOMER'
-          "
+          *ngIf="isAuthenticated$ | async"
           class="nav-link"
           [routerLink]="['/prenotazioni']"
           routerLinkActive="active"
           >Prenotazioni</a
         >
-        <!-- && (currentUserType$ | async) === 'CUSTOMER' -->
+        <!-- *ngIf="
+           (isAuthenticated$ | async) 
+         " -->
+        <!-- *ngIf="
+            (isAuthenticated$ | async) &&
+            (currentUserType$ | async) === 'CUSTOMER'
+          " -->
       </li>
       <li class="nav-item">
         <a
-          *ngIf="
-            (isAuthenticated$ | async) && (currentUserType$ | async) === 'OWNER'
-          "
+          *ngIf="isAuthenticated$ | async"
           class="nav-link"
           [routerLink]="['/ituoiristoranti']"
           routerLinkActive="active"
           id="ituoiristoranti-a"
         >
-          <!--&& (currentUserType$ | async) === 'OWNER' -->
+          <!-- *ngIf="
+            (isAuthenticated$ | async) 
+          " -->
+          <!-- *ngIf="
+            (isAuthenticated$ | async) && (currentUserType$ | async) === 'OWNER'
+          " -->
           I Tuoi Ristoranti
         </a>
       </li>
@@ -74,15 +80,27 @@
           >Registrati</a
         >
       </li>
-      <div class="d-flex w-100 justify-content-end me-2">
-        <button
-          *ngIf="isAuthenticated$ | async"
-          type="button"
-          class="btn btn-danger"
-          (click)="logout()"
-        >
-          LOGOUT
-        </button>
+      <div class="w-100 d-flex justify-content-end">
+        <div class="me-2">
+          <button
+            type="button"
+            class="btn btn-primary"
+            *ngIf="isAuthenticated$ | async"
+            (click)="navProfilo()"
+          >
+            PROFILO
+          </button>
+        </div>
+        <div class="me-2">
+          <button
+            *ngIf="isAuthenticated$ | async"
+            type="button"
+            class="btn btn-danger"
+            (click)="logout()"
+          >
+            LOGOUT
+          </button>
+        </div>
       </div>
     </ul>
   </div>

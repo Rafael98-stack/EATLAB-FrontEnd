@@ -13,13 +13,19 @@ export class NavbarComponent implements OnInit {
 
   currentUserType$: Observable<string> | undefined;
 
+  currentUserAvatar$: Observable<string | null> | undefined; // Aggiungi questa variabile per ottenere l'URL dell'avatar dell'utente
+
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isAuthenticated$ = this.authSrv.user$;
     this.currentUserType$ = this.authSrv.currentUserTypeAsObs;
-
+    this.currentUserAvatar$ = this.authSrv.currentUserAvatar$;
     console.log(this.currentUserType$);
+  }
+
+  navProfilo(): void {
+    this.router.navigate(['/myprofile']);
   }
 
   logout() {

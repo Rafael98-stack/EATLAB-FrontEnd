@@ -9,11 +9,19 @@ export class User {
   password: string;
   type!: string;
   role!: string;
+  avatar: string;
   user = {};
-  constructor(name: string, surname: string, email: string, password: string) {
+  constructor(
+    name: string,
+    surname: string,
+    email: string,
+    password: string,
+    avatar: string
+  ) {
     this.name = name;
     this.surname = surname;
     this.email = email;
     this.password = password;
+    this.avatar = avatar;
   }
 }

@@ -9,11 +9,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-owner.component.scss'],
 })
 export class RegisterOwnerComponent implements OnInit {
-  newUser: AuthData = { name: '', surname: '', email: '', password: '' };
+  newUser: AuthData = {
+    name: '',
+    surname: '',
+    email: '',
+    password: '',
+    avatar: '',
+  };
 
   constructor(private authSrv: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  onLogoSelected(event: any): void {
+    const file: File = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.newUser.avatar = e.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  }
 
   registerOwner(): void {
     this.authSrv.registerOwner(this.newUser).subscribe(

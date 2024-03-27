@@ -27,7 +27,7 @@ export class AuthownerGuard implements CanActivate {
       return true;
     } else {
       alert('Non puoi accedere a questa pagina. \nAccedi o Registrati');
-      return this.router.createUrlTree(['/login']);
+      return this.router.createUrlTree(['/']);
     }
   }
 }

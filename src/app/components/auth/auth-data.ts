@@ -3,4 +3,5 @@ export interface AuthData {
   name: String;
   surname: String;
   password: string;
+  avatar: string;
 }

@@ -16,6 +16,8 @@ import { CreazioneRistoranteComponent } from './components/creazione-ristorante/
 import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
 import { CreaprenotazioneComponent } from './components/creaprenotazione/creaprenotazione.component';
 import { ModificaPrenotazioneComponent } from './components/modifica-prenotazione/modifica-prenotazione.component';
+import { ProfiloComponent } from './components/profilo/profilo.component';
+import { ModificaProfiloComponent } from './components/modifica-profilo/modifica-profilo.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,7 @@ const routes: Routes = [
   {
     path: 'prenotazioni',
     component: PrenotazioniComponent,
-    canActivate: [AuthCustomerGuard],
+    // canActivate: [AuthCustomerGuard],
   },
   {
     path: 'login',
@@ -47,7 +49,7 @@ const routes: Routes = [
   {
     path: 'ituoiristoranti',
     component: ITuoiRistorantiComponent,
-    canActivate: [AuthownerGuard],
+    // canActivate: [AuthownerGuard],
   },
   {
     path: 'creazioneristorante',
@@ -64,6 +66,14 @@ const routes: Routes = [
   {
     path: 'modificaprenotazione/:id',
     component: ModificaPrenotazioneComponent,
+  },
+  {
+    path: 'myprofile',
+    component: ProfiloComponent,
+  },
+  {
+    path: 'updateProfile',
+    component: ModificaProfiloComponent,
   },
   {
     path: '**',

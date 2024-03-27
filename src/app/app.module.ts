@@ -18,6 +18,8 @@ import { CreazioneRistoranteComponent } from './components/creazione-ristorante/
 import { ModificaRistoranteComponent } from './components/modifica-ristorante/modifica-ristorante.component';
 import { CreaprenotazioneComponent } from './components/creaprenotazione/creaprenotazione.component';
 import { ModificaPrenotazioneComponent } from './components/modifica-prenotazione/modifica-prenotazione.component';
+import { ProfiloComponent } from './components/profilo/profilo.component';
+import { ModificaProfiloComponent } from './components/modifica-profilo/modifica-profilo.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ModificaPrenotazioneComponent } from './components/modifica-prenotazion
     ModificaRistoranteComponent,
     CreaprenotazioneComponent,
     ModificaPrenotazioneComponent,
+    ProfiloComponent,
+    ModificaProfiloComponent,
   ],
   imports: [
     BrowserModule,

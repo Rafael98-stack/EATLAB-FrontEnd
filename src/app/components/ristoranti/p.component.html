@@ -18,6 +18,8 @@
             <h5 class="card-title fs-4 text-center">{{ restaurant.title }}</h5>
             <p>Indirizzo: {{ restaurant.address }}</p>
             <p>Telefono: {{ restaurant.telephone_contact }}</p>
+            <p>Citta': {{ restaurant.city }}</p>
+            <hr />
             <button
               class="btn btn-primary text-white"
               *ngIf="(currentUserType$ | async) === 'CUSTOMER'"

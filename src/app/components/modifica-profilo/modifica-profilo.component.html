@@ -1,0 +1,36 @@
+<div class="row">
+  <h2 class="d-flex justify-content-center">Modifica Profilo</h2>
+</div>
+<form (submit)="onSubmit()">
+  <label for="name">Nome:</label>
+  <input
+    type="text"
+    id="name"
+    [(ngModel)]="updatingUser.name"
+    name="name"
+    required
+    class="w-100 mb-2"
+  />
+
+  <label for="surname">Cognome:</label>
+  <input
+    type="text"
+    id="surname"
+    [(ngModel)]="updatingUser.surname"
+    name="surname"
+    required
+    class="w-100 mb-2"
+  />
+
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    id="email"
+    [(ngModel)]="updatingUser.email"
+    name="email"
+    required
+    class="w-100 mb-2"
+  />
+
+  <button class="btn btn-primary" type="submit">Salva modifiche</button>
+</form>
