@@ -1,7 +1,7 @@
 <body class="bg-dark">
   <div class="container py-5">
     <div class="bg-light p-3">
-      <div *ngIf="user">
+      <div *ngIf="user" class="border-bottom mb-3">
         <h2 class="row justify-content-center">Dettagli del profilo</h2>
         <ul>
           <li><strong>Nome:</strong> {{ user.name }}</li>
@@ -13,7 +13,7 @@
       <div *ngIf="!user">
         <p>Caricamento...</p>
       </div>
-      <hr />
+
       <app-modifica-profilo></app-modifica-profilo>
     </div>
   </div>

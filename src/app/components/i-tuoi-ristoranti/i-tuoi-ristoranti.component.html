@@ -12,22 +12,28 @@
           Crea un Post
         </button>
       </div>
-      <hr />
+
       <div *ngIf="myRestaurants$ | async as myRestaurants" class="">
-        <ul class="px-0 mx-1 row justify-content-around">
+        <ul class="px-0 mx-1 row justify-content-md-around">
           <li
-            class="col-5 px-0 bg-light my-3"
+            class="col-12 col-md-5 px-0 bg-light my-3 border rounded"
             *ngFor="let restaurant of myRestaurants"
           >
-            <img [src]="restaurant.logo" alt="Restaurant Logo" class="mb-3" />
+            <div class="border border-dark rounded">
+              <img
+                [src]="restaurant.logo"
+                alt="Restaurant Logo"
+                class="restaurant-image"
+              />
+            </div>
             <div class="ps-3">
               <h2>{{ restaurant.title }}</h2>
               <h3>{{ restaurant.address }}</h3>
               <h3>{{ restaurant.city }}</h3>
             </div>
             <hr />
-            <div class="row justify-content-around my-3">
-              <div class="col-3">
+            <div class="row my-3">
+              <div class="col d-flex justify-content-center">
                 <button
                   class="btn btn-success rounded"
                   (click)="navToModificaRistorante(restaurant.id)"
@@ -35,7 +41,7 @@
                   Modifica
                 </button>
               </div>
-              <div class="col-3">
+              <div class="col d-flex justify-content-center">
                 <button
                   (click)="deleteRestaurant(restaurant.id)"
                   class="btn btn-danger"
