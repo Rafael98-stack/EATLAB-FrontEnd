@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class PrenotazioniComponent implements OnInit {
   reservations: Reservation[] = [];
+
   constructor(
     private authSrv: AuthService,
     private router: Router,

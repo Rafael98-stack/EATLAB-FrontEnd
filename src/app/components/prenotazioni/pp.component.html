@@ -1,6 +1,9 @@
 <body>
-  <div class="container" *ngIf="reservations.length > 0; else noReservations">
-    <div class="row">
+  <div
+    class="container h-100 w-100"
+    *ngIf="reservations.length > 0; else noReservations"
+  >
+    <div class="row d-flex align-items-center pt-5 pt-md-4 pt-lg-0">
       <h1 class="text-center py-2">Le tue prenotazioni</h1>
       <div class="my-table">
         <div class="tbl-header">
@@ -10,7 +13,6 @@
                 <th scope="col" class="">Numero Ordine</th>
                 <th scope="col" class="">Data ordine</th>
                 <th scope="col">Numero persone</th>
-
                 <th scope="col">Azioni</th>
               </tr>
             </thead>
@@ -20,7 +22,7 @@
           <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
               <tr *ngFor="let reservation of reservations">
-                <th scope="row"># {{ reservation.id }}</th>
+                <th scope="row"># {{ reservation.id.slice(0, 6) }}</th>
                 <td class="">
                   {{ reservation.date }}
                 </td>
@@ -32,13 +34,15 @@
                       class="btn btn-primary mb-3"
                       (click)="navigateToEdit(reservation.id)"
                     >
-                      <i class="fa-solid fa-pencil"> </i>Modifica
+                      <i class="fa-solid fa-pencil"></i>
+                      <span class="d-none d-sm-inline">Modifica</span>
                     </button>
                     <button
                       class="btn btn-danger"
                       (click)="deleteReservation(reservation.id)"
                     >
-                      <i class="fa-solid fa-trash"></i> Elimina
+                      <i class="fa-solid fa-trash"></i
+                      ><span class="d-none d-sm-inline"> Elimina</span>
                     </button>
                   </div>
                 </td>

@@ -6,4 +6,15 @@ body {
 }
 .loginContainer {
   background: #7c603b;
+  margin: 0 1px;
+}
+@media screen and (max-width: 320px) {
+  body {
+    min-height: 100vh;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  body {
+    min-height: 100vh;
+  }
 }
