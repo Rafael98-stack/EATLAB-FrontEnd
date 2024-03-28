@@ -2,3 +2,15 @@ body {
   height: 95vh;
   background: #000;
 }
+@media screen and (max-width: 320px) {
+  body {
+    height: 100vh;
+    background: #000;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  body {
+    height: 100vh;
+    background: #000;
+  }
+}

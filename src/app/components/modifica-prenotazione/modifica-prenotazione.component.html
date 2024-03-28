@@ -1,36 +1,43 @@
-<body>
-  <div class="container py-5">
-    <div class="d-flex justify-content-center bg-light p-3">
-      <div class="bg-light p-3 col-8 border border-secondary">
-        <h1 class="d-flex justify-content-center">Modifica Prenotazione</h1>
-        <form (ngSubmit)="updateReservation()">
-          <div class="form-group pb-3">
-            <label for="date">Data:</label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              [(ngModel)]="reservationUpdating.date"
-              required
-              class="w-100"
-            />
+<body class="">
+  <div class="h-100 row p-0 m-0">
+    <div
+      class="container py-5 d-flex align-items-center justify-content-center d-lg-block"
+    >
+      <form (ngSubmit)="updateReservation()" class="w-100 pt-lg-5 pt-xl-5">
+        <div class="d-flex justify-content-center bg-light p-3">
+          <div class="border border-secondary col-8 p-3">
+            <div class="form-group pb-3">
+              <label for="title">Data</label>
+
+              <input
+                type="date"
+                id="date"
+                name="date"
+                [(ngModel)]="reservationUpdating.date"
+                placeholder="Data"
+                required
+                autocomplete="off"
+                class="w-100"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Numero di Persone</label>
+
+              <input
+                type="number"
+                id="number"
+                name="persons"
+                [(ngModel)]="reservationUpdating.persons"
+                placeholder="Persone"
+                required
+                autocomplete="off"
+                class="w-100"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Crea</button>
           </div>
-          <div class="form-group pb-3">
-            <label for="persons">Numero di persone</label>
-            <input
-              type="number"
-              id="persons"
-              name="persons"
-              [(ngModel)]="reservationUpdating.persons"
-              required
-              class="w-100"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">
-            Aggiorna Prenotazione
-          </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 </body>

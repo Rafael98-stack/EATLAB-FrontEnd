@@ -2,7 +2,7 @@
   <div class="container py-5">
     <form (ngSubmit)="createRestaurant()">
       <div class="row bg-light p-3">
-        <div class="col-6">
+        <div class="col-sm-6">
           <div>
             <label for="logoInput">Seleziona il Logo:</label>
             <input
@@ -100,15 +100,21 @@
 
           <button type="submit" class="btn btn-primary mt-3">Crea</button>
         </div>
-        <div class="col-6 d-flex justify-content-center align-items-center">
-          <div *ngIf="newrestaurant.logo">
-            <img
-              [src]="newrestaurant.logo"
-              alt="Logo"
-              width="100"
-              height="100"
-            />
-          </div>
+        <div class="col-sm-6 d-flex justify-content-center align-items-center">
+          <img
+            *ngIf="newrestaurant.logo === ''"
+            src="https://www.creativefabrica.com/wp-content/uploads/2021/05/15/restaurant-logo-Graphics-12037753-1-1-580x435.jpg"
+            alt="Logo"
+            width="100"
+            height="100"
+          />
+          <img
+            *ngIf="newrestaurant.logo"
+            [src]="newrestaurant.logo"
+            alt="Logo"
+            width="100"
+            height="100"
+          />
         </div>
       </div>
     </form>

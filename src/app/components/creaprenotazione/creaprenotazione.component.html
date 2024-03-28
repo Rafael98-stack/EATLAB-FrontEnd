@@ -1,39 +1,43 @@
-<body>
-  <div class="container py-5">
-    <form (ngSubmit)="createReservation()">
-      <div class="d-flex justify-content-center bg-light p-3">
-        <div class="border border-secondary col-8 p-3">
-          <div class="form-group pb-3">
-            <label for="title">Data</label>
+<body class="">
+  <div class="h-100 row p-0 m-0">
+    <div
+      class="container py-5 d-flex align-items-center justify-content-center d-lg-block"
+    >
+      <form (ngSubmit)="createReservation()" class="w-100">
+        <div class="d-flex justify-content-center bg-light p-3">
+          <div class="border border-secondary col-8 p-3">
+            <div class="form-group pb-3">
+              <label for="title">Data</label>
 
-            <input
-              type="date"
-              id="date"
-              name="date"
-              [(ngModel)]="reservationDto.date"
-              placeholder="Data"
-              required
-              autocomplete="off"
-              class="w-100"
-            />
-          </div>
-          <div class="form-group">
-            <label for="description">Numero di Persone</label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                [(ngModel)]="reservationDto.date"
+                placeholder="Data"
+                required
+                autocomplete="off"
+                class="w-100"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Numero di Persone</label>
 
-            <input
-              type="number"
-              id="number"
-              name="persons"
-              [(ngModel)]="reservationDto.persons"
-              placeholder="Persone"
-              required
-              autocomplete="off"
-              class="w-100"
-            />
+              <input
+                type="number"
+                id="number"
+                name="persons"
+                [(ngModel)]="reservationDto.persons"
+                placeholder="Persone"
+                required
+                autocomplete="off"
+                class="w-100"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Crea</button>
           </div>
-          <button type="submit" class="btn btn-primary mt-3">Crea</button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </body>
