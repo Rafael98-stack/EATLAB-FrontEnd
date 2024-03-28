@@ -4,8 +4,6 @@ body {
   background-position: center;
   height: 95vh;
 }
-.container {
-}
 .secondDiv {
   background: #7c603b;
 }
@@ -16,7 +14,40 @@ label {
 input {
   width: 100%;
 }
-img {
-  height: 300px;
-  width: 100%;
+.my-img {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  body {
+    min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 768px) {
+  body {
+    min-height: 100vh;
+  }
+}
+@media screen and (min-width: 1025px) {
+  body {
+    min-height: 95vh;
+    .my-img {
+      margin: auto;
+      width: 300px;
+      height: 300px;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
 }

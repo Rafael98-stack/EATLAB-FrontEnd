@@ -15,7 +15,13 @@ body {
   }
 }
 @media screen and (max-width: 320px) {
+  body {
+    min-height: 100vh;
+  }
 }
 
 @media screen and (min-width: 321px) and (max-width: 768px) {
+  body {
+    min-height: 100vh;
+  }
 }

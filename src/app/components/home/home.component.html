@@ -1,8 +1,11 @@
 <html>
   <body>
-    <div class="container w-100 h-100">
+    <div class="container d-flex justify-content-center w-100 h-100">
       <div id="main-part" class="row justify-content-center align-items-center">
-        <div id="interactive-window" class="col-6 rounded">
+        <div
+          id="interactive-window"
+          class="col-sm-12 col-md-8 col-lg-6 col-xl-6 rounded"
+        >
           <div class="d-flex justify-content-center p-1">
             <h1 class="m-0 fst-italic">HAI UN'ATTIVITA'?</h1>
           </div>
@@ -15,11 +18,18 @@
             </div>
             <div class="d-flex justify-content-center">
               <a
-                class="fs-5 text-center text-white fw-bold nav-link rounded bg-primary d-flex justify-content-center w-50"
+                class="fs-5 text-center text-white fw-bold nav-link rounded bg-primary d-flex justify-content-center d-none d-md-inline w-md-50 py-1 px-3"
                 [routerLink]="['/registerowner']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
-                >Registrati come nuovo Proprietario
+                >Registrati
+              </a>
+              <a
+                class="fs-5 text-center text-white fw-bold nav-link rounded-circle bg-primary d-flex justify-content-center d-md-none p-2"
+                [routerLink]="['/registerowner']"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+                ><i class="fa-solid fa-user-plus"></i>
               </a>
             </div>
           </div>

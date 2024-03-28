@@ -1,9 +1,11 @@
 <body>
-  <div class="container h-100 w-100 p-5">
-    <div class="secondDiv p-5">
+  <div
+    class="container d-flex justify-content-center align-items-center h-100 w-100"
+  >
+    <div class="secondDiv p-2 w-75">
       <form (ngSubmit)="registerCustomer()">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-12 col-md-6 col-xl-6">
             <div>
               <label for="logoInput">Seleziona la tua Immagine:</label>
               <input
@@ -72,11 +74,18 @@
             <button type="submit" class="btn btn-primary mt-3">Invia</button>
           </div>
           <div
-            class="my-img col-6 d-flex justify-content-center align-items-center"
+            class="my-img py-2 col-sm-12 col-md-6 col-xl-6 d-flex justify-content-center align-items-center"
           >
-            <div *ngIf="newUser.avatar">
-              <img [src]="newUser.avatar" alt="Logo" width="100" height="100" />
-            </div>
+            <img
+              *ngIf="newUser.avatar === ''"
+              src="https://www.creativefabrica.com/wp-content/uploads/2021/05/15/restaurant-logo-Graphics-12037753-1-1-580x435.jpg"
+              alt="Logo"
+            />
+            <img
+              *ngIf="newUser.avatar !== ''"
+              [src]="newUser.avatar"
+              alt="Logo"
+            />
           </div>
         </div>
       </form>
